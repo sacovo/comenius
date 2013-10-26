@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>{% block title %}{{appname}} | {{title}}{% endblock title %}</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        {% block style %}
+        <!-- Bootstrap -->
+        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+        {% endblock style %}
+        
+        {% block scripts %}
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        {% endblock scripts %}
+    </head>
+    <body>
+        {% block navigation %}
+        <!-- Navigation goes here... -->
+        {% endblock navigation %}
+        <div class="container">
+        {% block container %}
+            
+        {% endblock container %}    
+        </div>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    </body>
+</html>

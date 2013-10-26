@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+    <link href="{% static 'comenius/css/style.css' %}" rel="stylesheet" media="screen">
+{% endblock style %}
+
+
+{% block navigation %}
+    {% include 'comenius/navbar.html' with appname=appname site=site%}
+{% endblock navigation %}
+
+
+{% block container %}
+    <header>
+    {% block header %}
+        <h1>{{appname}}</h1>
+        <p>Here comes a descriptive text and so on...</p>
+    {% endblock header %}
+    </header>
+{% endblock container %}
