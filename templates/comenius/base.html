@@ -18,4 +18,14 @@
         <p>Here comes a descriptive text and so on...</p>
     {% endblock header %}
     </header>
+    <section class="container">
+        <article class="main">
+        {% block main %}
+        {% endblock main %}
+        </article>
+        <aside>
+        {% block aside %}
+        {% endblock aside %}
+        </aside>
+    </section>
 {% endblock container %}
