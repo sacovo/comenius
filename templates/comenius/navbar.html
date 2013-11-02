@@ -14,6 +14,16 @@
             {% for subsite in site %}
                 {% include "nav_point.html" with site=subsite only %}
             {% endfor %}
+            <li><a id="login" data-container="body" data-toggle="popover" data-placement="bottom"
+                   data-content="<b>Test</b>" data-html="true">Login</a></li>
+                <script>
+                    $(function () {
+                        $("[data-toggle='tooltip']").tooltip();
+                    });
+                    $(function () {
+                        $("[data-toggle='popover']").popover();
+                    });
+                </script>
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
