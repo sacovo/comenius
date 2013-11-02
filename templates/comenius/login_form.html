@@ -1,0 +1,6 @@
+<form action='{% url 'comenius:login' %}' role='form' method='post'>
+    {% csrf_token %}
+    <input class='form-control' type='text' name='username' placeholder='Benutzername' />
+    <input class='form-control' type='password' name='password' placeholder='Passwort' />
+    <button type='submit' class='btn btn-primary'>Login</button>
+</form>
