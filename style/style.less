@@ -2,6 +2,13 @@
 @import "variables.less";
 @import url(http://fonts.googleapis.com/css?family=Ubuntu|Open+Sans);
 
+header {
+    & > p  {
+        font-weight: 600;
+    }
+}
+
+
 section.container {
     .make-row();
     
@@ -13,4 +20,9 @@ section.container {
         .make-md-column(4);
         .panel;
     }
+    
+    & .panel-body {
+        color: rgb(117, 117, 139);
+    }
+    
 }
