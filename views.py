@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect
 site = []
 
 site.append(nav("Home", reverse('comenius:index')))
+site.append(nav("Impressum", reverse('comenius:impressum')))
 
 blog_extra = {
     "site": site,
@@ -27,3 +28,17 @@ index = ExtraTemplateView.as_view(
                     'appname': "comenius",
                 })
 
+impressum = ExtraTemplateView.as_view(
+                template_name="comenius/impressum.html",
+                extra={
+                    'title': "Impressum",
+                    'appname': "comenius",
+                })
+
+about = ExtraTemplateView.as_view(
+		template_name="comenius/about.html",
+		extra={
+		    'title': "About",
+		    'appname': "comenius",
+		})
+		
