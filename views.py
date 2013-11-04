@@ -2,7 +2,7 @@
 
 from djangoutils.views.generic import *
 from djangoutils import NavigationPoint as nav
-
+import django.contrib.auth.views
 from django.core.urlresolvers import reverse_lazy as reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -41,4 +41,6 @@ about = ExtraTemplateView.as_view(
 		    'title': "About",
 		    'appname': "comenius",
 		})
-		
+
+login = lambda request: django.contrib.auth.views.login(request, extra_context=blog_extra)
+
