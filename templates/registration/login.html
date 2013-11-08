@@ -1,16 +1,16 @@
 {% extends 'comenius/base.html' %}
 
-{% block header %}
-    <h1>Anmelden</h1>
+{% block subtitle %}
     <p>
         {% for key, error in form.errors.items %}
             {{error}}
         {% endfor %}
     </p>
-{% endblock header %}
+{% endblock %}
 
 {% block main %}
-    <form action="" role="form">
+    <form action="" role="form" method="post">
+        {% csrf_token %}
         <div class="form-group"><label for="id_username">Benutzername</label>{{form.username}}</div>
         <div class="form-group"><label for="id_password">Passwort</label>{{form.password}}</div>
         <button type="submit" class="btn btn-default">Submit</button>

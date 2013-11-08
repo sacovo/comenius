@@ -25,9 +25,9 @@
                     });
                 </script>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" action="{% url 'comenius:search' %}" method="get">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" name="search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>

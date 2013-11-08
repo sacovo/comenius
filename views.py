@@ -42,5 +42,13 @@ about = ExtraTemplateView.as_view(
 		    'appname': "comenius",
 		})
 
-login = lambda request: django.contrib.auth.views.login(request, extra_context=blog_extra)
+login = lambda request: django.contrib.auth.views.login(request, extra_context=dict(blog_extra.items()+{'title':"Login"}.items()))
+logout = lambda request: django.contrib.auth.views.logout(request, extra_context=blog_extra)
+
+search = ExtraTemplateView.as_view(
+        template_name="comenius/search.html",
+        extra={
+            'title': "Suche",
+            'appname': 'comenius',
+        })
 
