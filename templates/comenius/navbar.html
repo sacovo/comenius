@@ -15,7 +15,7 @@
                 {% include "nav_point.html" with site=subsite only %}
             {% endfor %}
             {% if user.is_authenticated %}
-                <li><a href="{% url 'comenius:logout' %}">Logout</a></li>
+                <li><a href="{% url 'comenius:logout' %}?next=/">Logout</a></li>
             {% else %}
                 <li>
                     <a id="login" data-container="body" data-toggle="popover" data-placement="bottom"

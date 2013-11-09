@@ -43,7 +43,7 @@ about = ExtraTemplateView.as_view(
 		})
 
 login = lambda request: django.contrib.auth.views.login(request, extra_context=dict(blog_extra.items() + {'title':"Login"}.items()))
-logout = lambda request: django.contrib.auth.views.logout(request, extra_context=dict(blog_extra.items() + {'next_page':"/"}.items()))
+logout = lambda request: django.contrib.auth.views.logout(request, extra_context=dict(blog_extra.items()))
 
 search = ExtraTemplateView.as_view(
         template_name="comenius/search.html",
