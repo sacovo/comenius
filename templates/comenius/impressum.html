@@ -1,6 +1,9 @@
 {% extends 'comenius/base.html' %}
 {% load staticfiles %}
+{% load thumbnail %}
 {% block main %}
-
+    {% thumbnail "http://imgs.xkcd.com/comics/substitutions.png" "40x40" crop="80% top" as im %}
+    <img src="{{ im.url }}">
+{% endthumbnail %}
 {% endblock main %}
 
