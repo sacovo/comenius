@@ -14,8 +14,13 @@
             {% for subsite in site %}
                 {% include "nav_point.html" with site=subsite only %}
             {% endfor %}
-            <li><a id="login" data-container="body" data-toggle="popover" data-placement="bottom"
-                   data-content="{% include 'comenius/login_form.html' %}" data-html="true">Login</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'comenius:logout' %}">Logout</a></li>
+            {% else %}
+                <li>
+                    <a id="login" data-container="body" data-toggle="popover" data-placement="bottom"
+                       data-content="{% include 'comenius/login_form.html' %}" data-html="true">Login</a>
+                </li>
                 <script>
                     $(function () {
                         $("[data-toggle='tooltip']").tooltip();
@@ -24,6 +29,7 @@
                         $("[data-toggle='popover']").popover();
                     });
                 </script>
+            {% endif %}
             </ul>
             <form class="navbar-form navbar-right" role="search" action="{% url 'comenius:search' %}" method="get">
                 <div class="form-group">
