@@ -15,10 +15,9 @@ from comenius.models import Album
 site = []
 
 site.append(nav("Home", reverse('comenius:index')))
-site.append(nav("Impressum", reverse('comenius:impressum')))
-
 album_nav = [
     nav("Album Erstellen", reverse('comenius:album-create')),
+    nav("Impressum", reverse('comenius:impressum')),
 ]
 
 site.append(nav("Weiteres", subsites=album_nav))
@@ -71,7 +70,6 @@ class AlbumCreate(ExtraCreateView):
         form.instance.owner = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
-
 album_create = login_required(
 	AlbumCreate.as_view(
         extra = {
@@ -79,3 +77,11 @@ album_create = login_required(
             'appname': 'comenius',
         })
 )
+
+album_detail = ExtraDetailView.as_view(
+        model = Album,
+        extra = {
+            'title': lambda c: c['object'].name,
+            'appname': "comenius",
+        })
+

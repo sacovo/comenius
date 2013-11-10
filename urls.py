@@ -8,5 +8,6 @@ urlpatterns = patterns('comenius.views',
     url(r"^search/$", 'search', name="search"),
     url(r"^accounts/login/$", 'login', name="login", ),
     url(r"^accounts/logout/$", 'logout', name="logout"),
-    url(r"^album/create/$", 'album_create', name="album-create")
+    url(r"^album/create/$", 'album_create', name="album-create"),
+    url(r"^album/(?P<pk>\d+)/$", 'album_detail', name="album-detail")
 )
