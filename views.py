@@ -21,7 +21,7 @@ album_nav = [
     nav("Album Erstellen", reverse('comenius:album-create')),
 ]
 
-site.append(nav("Album", subsites=album_nav))
+site.append(nav("Weiteres", subsites=album_nav))
 
 blog_extra = {
     "site": site,
