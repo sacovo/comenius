@@ -5,6 +5,7 @@ class Album(models.Model):
     name = models.CharField(max_length=40)
     images = models.ManyToManyField("Image", blank=True)
     owner = models.ForeignKey(User)
+    
 
 
 class Image(models.Model):
