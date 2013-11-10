@@ -71,9 +71,11 @@ class AlbumCreate(ExtraCreateView):
         form.instance.owner = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
-@login_required
-album_create = AlbumCreate.as_view(
+
+album_create = login_required(
+	AlbumCreate.as_view(
         extra = {
             'title': "Album erstellen",
             'appname': 'comenius',
         })
+)
