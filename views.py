@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy as reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 
-from django.contrib.auth.decoraters import login_required
+from django.contrib.auth.decorators import login_required
 
 from comenius.models import Album
 # Create your views here.
@@ -63,7 +63,6 @@ search = ExtraTemplateView.as_view(
             'appname': 'comenius',
         })
 
-@login_required
 class AlbumCreate(ExtraCreateView):
     model = Album
     fields = ['name']
@@ -72,8 +71,9 @@ class AlbumCreate(ExtraCreateView):
         form.instance.owner = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
-album_create = AlbumCreate.as_view(
+
+album_create = login_required(AlbumCreate.as_view(
         extra = {
             'title': "Album erstellen",
             'appname': 'comenius',
-        })
+        }))
