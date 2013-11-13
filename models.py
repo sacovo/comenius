@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 class Album(models.Model):
     name = models.CharField(max_length=40)
     images = models.ManyToManyField("Image", blank=True)
+    is_public = models.BooleanField(default=False)
     owner = models.ForeignKey(User)
     
     @models.permalink
@@ -17,3 +18,42 @@ class Image(models.Model):
     image = models.ImageField(upload_to="images/%Y/%m%/%d")
     description = models.CharField(max_length=255, blank=True)
 
+class School(models.Model):
+    name = models.CharField(max_length=120)
+    homepage = models.URLField()
+    location = models.TextField()
+    students = models.ManyToManyField(User)
+
+
+class Project(models.Model):
+    slug = models.SlugField(primary_key=True)
+    title = models.CharField(max_length=140)
+    short_desc = models.TextField()
+    description = models.TextField()
+    album = models.ForeignKey(Album)
+    users = models.ManyToManyField(User)
+    school = models.ForeignKey(School)
+    category = models.ForeignKey("Category")
+    documents = models.ForeignKey("Document")
+
+class Category(models.Model):
+    slug = models.SlugField(primary_key=True)
+    name = models.CharField(max_length=80)
+    description = models.TextField()
+
+class Document(models.Model):
+    document = models.FileField(upload_to="documents/%Y/%m/%d")
+    name = models.CharField(max_length=80)
+    owner = models.ForeignKey(User)
+
+
+class Event(models.Model):
+    date = models.DateTimeField()
+    name = models.CharField(max_length=140)
+    description = models.TextField()
+    owner = models.ForeignKey(User)
+
+class Report(models.Model):
+    title = models.CharField(max_length=140)
+    content = models.TextField()
+    owner = models.ForeignKey(User, null=True)
