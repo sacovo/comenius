@@ -15,12 +15,19 @@ from comenius.models import Album
 site = []
 
 site.append(nav("Home", reverse('comenius:index')))
-album_nav = [
-    nav("Album Erstellen", reverse('comenius:album-create')),
-    nav("Impressum", reverse('comenius:impressum')),
-]
+"""
+projekte = []
 
-site.append(nav("Weiteres", subsites=album_nav))
+projekte.append(nav("Mobilitt"),
+                nav("Ernhrung"),
+                nav("Abfall"),
+                nav("Energie")
+)
+
+site.append(nav("Projekte", subsites=projekte))
+
+site.append(nav("Gallerie"))
+"""
 
 blog_extra = {
     "site": site,
