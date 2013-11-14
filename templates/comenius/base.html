@@ -27,68 +27,91 @@
         </article>
         <aside>
         {% block aside %}
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#disclaimerPanel">
-                    EU F&ouml;rderung
-                </a>
-            </h4>
-        </div>
-        <div id="disclaimerPanel" class="panel-collapse collapse">
-            <div class="panel-body">
-        <i>Dieses Projekt wurde mit Unterstützung der Europäischen Kommission finanziert. Die Verantwortung für den Inhalt dieser Veröffentlichung (Mitteilung) trägt allein der Verfasser, die Kommission haftet nicht für die weitere Verwendung der darin enthaltenen Angaben.</i>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#disclaimerPanel">
+                                EU F&ouml;rderung
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="disclaimerPanel" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <i>Dieses Projekt wurde mit Unterstützung der Europäischen Kommission finanziert.
+                            Die Verantwortung für den Inhalt dieser Veröffentlichung (Mitteilung) trägt allein
+                            der Verfasser, die Kommission haftet nicht für die weitere Verwendung der darin
+                            enthaltenen Angaben.</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#linkPanel">
+                                Links
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="linkPanel" class="panel-collapse collapse">
+                        <div class="panel-body list-group">
+                                <li class="list-group-item">École privée Sainte-Anne, Ettelbruck, Luxemburg <a href="http://sainte-anne.lu/">Homepage</a></li>
+                                <li class="list-group-item">Kantonsschule Wohlen, Wohlen Ag, Schweiz <a href="http://www.kanti-wohlen.ch/home-de.xhtm">Homepage</a></li>
+                                <li class="list-group-item">Droste-Hülshoff-Gymnasium, Freiburg, Deutschland <a href="http://www.dhg-freiburg.de/joomla/">Homepage</a></li>
+                                <li class="list-group-item">Bundesgymnasium Dornbirn, Dornbirn, &Ouml;sterreich <a href="http://www.bgdornbirn.at/">Homepage</a></li>
+                                <li class="list-group-item"><a href="http://en.unesco.org/">UNESCO Homepage</a></li>
+                                <li class="list-group-item"><a href="http://ec.europa.eu/education/lifelong-learning-programme/comenius_de.htm">Comenius</a></li>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#terminPanel">
+                                Termine
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="terminPanel" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div id="calendar">
+                                <ul class="list-group">
+                                    {% for event in events %}
+                                    <li class="list-group-item"><a data-container="body" data-toggle="popover" data-placement="left" data-title="{{event.date}}" data-content="{{event.description}}" >{{event.name}}</a>
+                                        {% if user.is_staff %}
+                                            <div class="pull-right"><a href="{% url 'comenius:event-update' pk=event.pk %}"><span class="glyphicon glyphicon-edit"></span></a></div>
+                                        {% endif %}
+                                    </li>
+                                    {% empty %}
+                                    Keine Termine!
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% if user.is_staff %}
+                                <a href="{% url 'comenius:event-create' %}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Event hinzuf&uuml;gen</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#austauschPanel">
+                                Austausch
+                            </a>
+                        </h4>
+                    </div>
+                <div id="austauschPanel" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="/reports/1/">Luxemburg</a></li>
+                            <li class="list-group-item"><a href="">&Ouml;sterreich</a></li>
+                            <li class="list-group-item"><a href="">Schweiz</a></li>
+                            <li class="list-group-item"><a href="">Deutschland</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#linkPanel">
-                    Links
-                </a>
-            </h4>
-        </div>
-        <div id="linkPanel" class="panel-collapse collapse">
-            <div class="panel-body">
-            <ul class="list-group">
-            <li class="list-group-item">École privée Sainte-Anne, Ettelbruck, Luxemburg <a href="http://sainte-anne.lu/">Homepage</a></li>
-            <li class="list-group-item">Kantonsschule Wohlen, Wohlen Ag, Schweiz <a href="http://www.kanti-wohlen.ch/home-de.xhtm">Homepage</a></li>
-            <li class="list-group-item">Droste-Hülshoff-Gymnasium, Freiburg, Deutschland <a href="http://www.dhg-freiburg.de/joomla/">Homepage</a></li>
-            <li class="list-group-item">Bundesgymnasium Dornbirn, Dornbirn, &Ouml;sterreich <a href="http://www.bgdornbirn.at/">Homepage</a></li>
-            <li class="list-group-item"><a href="http://en.unesco.org/">UNESCO Homepage</a></li>
-            <li class="list-group-item"><a href="http://ec.europa.eu/education/lifelong-learning-programme/comenius_de.htm">Comenius</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#terminPanel">
-                    Termine
-                </a>
-            </h4>
-        </div>
-        <div id="terminPanel" class="panel-collapse collapse">
-            <div class="panel-body">
-            
-        </div>
-        <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#austauchPanel">
-                    Links
-                </a>
-            </h4>
-        </div>
-        <div id="austauschPanel" class="panel-collapse collapse">
-            <div class="panel-body">
-            
-        </div>
-    </div>
-    </div>
-</div>
         {% endblock aside %}
         </aside>
     </section>

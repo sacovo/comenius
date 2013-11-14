@@ -1,5 +1,34 @@
 {% extends 'comenius/base.html' %}
-
+{% load thumbnail %}
 {% block main %}
-    {{object}}
+    <div class="row">
+        {% if user == object.owner %}
+        <div class="col-sm-12 col-md-12">
+            <h3>Bild hinzuf&uuml;gen</h3>
+            <form action="{% url 'comenius:image-album-add' %}" method="post" enctype="multipart/form-data" >
+                <div class="form-group">
+                    <input type="file" name="image"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="description" placeholder="Beschreibung" />
+                </div>
+                <input type="hidden" name="album" value="{{album.pk}}" id="" />
+                {% csrf_token %}
+            </form>
+        </div>
+        {% endif %}
+        {% for image in object.images.all %}
+        <div class="col-sm-4 col-md-4">
+            <a href="#" class="thumbnail">
+                {% thumbnail image.image "200" as im %}
+                <img src="{{im.url}}" alt="{{image.description}}">
+                {% endthumbnail %}
+            </a>
+        </div>
+        {% empty %}
+            <b>Noch keine Bilder vorhanden!</b>
+        {% endfor %}
+       
+    </div>
+    
 {% endblock %}

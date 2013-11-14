@@ -15,7 +15,7 @@ class Album(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to="images/%Y/%m%/%d")
+    image = models.ImageField(upload_to="images/%Y/%m/%d")
     description = models.CharField(max_length=255, blank=True)
 
 class School(models.Model):
@@ -23,6 +23,9 @@ class School(models.Model):
     homepage = models.URLField()
     location = models.TextField()
     students = models.ManyToManyField(User)
+    
+    def __unicode__(self):
+        return self.name
 
 
 class Project(models.Model):
@@ -34,12 +37,15 @@ class Project(models.Model):
     users = models.ManyToManyField(User)
     school = models.ForeignKey(School)
     category = models.ForeignKey("Category")
-    documents = models.ForeignKey("Document")
+    documents = models.ForeignKey("Document", blank=True, null=True)
 
 class Category(models.Model):
     slug = models.SlugField(primary_key=True)
     name = models.CharField(max_length=80)
     description = models.TextField()
+    
+    def __unicode__(self):
+        return self.name
 
 class Document(models.Model):
     document = models.FileField(upload_to="documents/%Y/%m/%d")
@@ -52,6 +58,9 @@ class Event(models.Model):
     name = models.CharField(max_length=140)
     description = models.TextField()
     owner = models.ForeignKey(User)
+    @models.permalink
+    def get_absolute_url(self):
+        return ('comenius:index', (), {})
 
 class Report(models.Model):
     title = models.CharField(max_length=140)

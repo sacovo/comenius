@@ -18,7 +18,7 @@
                 <li><a href="{% url 'comenius:logout' %}?next=/">Logout</a></li>
             {% else %}
                 <li>
-                    <a id="login" data-container="body" data-toggle="popover" data-placement="bottom"
+                    <a data-container="body" data-toggle="popover" data-placement="bottom"
                        data-content="{% include 'comenius/login_form.html' %}" data-html="true">Login</a>
                 </li>
                 <script>
