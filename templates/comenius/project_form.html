@@ -1,0 +1,14 @@
+{% extends 'comenius/category_detail.html' %}
+
+{% block main %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{field.label}}
+                {{field}}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Abschicken</button>
+    </form>
+{% endblock main %}

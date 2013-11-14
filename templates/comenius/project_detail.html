@@ -1,0 +1,7 @@
+{% extends 'comenius/category_detail.html' %}
+{% load comenius_extra %}
+{% block main %}
+    {{object.short_desc|markup}}
+    {{object.description|markup}}
+    
+{% endblock main %}

@@ -1,0 +1,26 @@
+{% extends 'comenius/base.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block main %}
+<div class="row">
+{% for album in object_list %}
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+    {% thumbnail album.images.all.0.image "200" as im %}
+      <img  src="{{im.url}}">
+      {% endthumbnail %}
+      <div class="caption">
+        <h3>{{album.name}} {{album.is_public}}</h3>
+        <p><a href="{% url 'comenius:album-detail' pk=album.pk %}">Anschauen</a></p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% if user.is_authenticated %}
+    <div class="col-sm-6 col-md-4">
+            <a href="{% url 'comenius:album-create' %}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Hinzuf&uuml;gen</a>
+    </div>
+{% endif %}
+</div>
+{% endblock main %}
+

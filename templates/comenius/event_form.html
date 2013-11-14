@@ -1,0 +1,21 @@
+{% extends 'comenius/base.html' %}
+{% block subtitle %}
+    <p>
+        {% for key, error in form.errors.items %}
+            {{error}}
+        {% endfor %}
+    </p>
+{% endblock %}
+
+{% block main %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% for field in form %}
+            <div class="form-group">
+                {{field.label}}
+                {{field}}
+            </div>
+        {% endfor %}
+        {% csrf_token %}
+        <button type="submit">Abschicken</button>
+    </form>
+{% endblock %}
