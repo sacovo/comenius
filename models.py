@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 class Album(models.Model):
+    '''
+        Model to store images in a group and give them a name.
+        Owner is safed, to enable controlled editing.
+    '''
     name = models.CharField(max_length=40)
     images = models.ManyToManyField("Image", blank=True)
     is_public = models.BooleanField(default=False)
@@ -15,10 +19,16 @@ class Album(models.Model):
 
 
 class Image(models.Model):
+    '''
+        Safe images with a description
+    '''
     image = models.ImageField(upload_to="images/%Y/%m/%d")
     description = models.CharField(max_length=255, blank=True)
 
 class School(models.Model):
+    '''
+        Safe school to connect students to them
+    '''
     name = models.CharField(max_length=120)
     homepage = models.URLField()
     location = models.TextField()
@@ -29,6 +39,9 @@ class School(models.Model):
 
 
 class Project(models.Model):
+    '''
+        Publish projects on website
+    ''''
     slug = models.SlugField(primary_key=True)
     title = models.CharField(max_length=140)
     short_desc = models.TextField()
