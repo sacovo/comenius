@@ -52,6 +52,10 @@ class Project(models.Model):
     category = models.ForeignKey("Category")
     documents = models.ForeignKey("Document", blank=True, null=True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('comenius:project-detail', (), {'slug':self.slug})
+
 class Category(models.Model):
     slug = models.SlugField(primary_key=True)
     name = models.CharField(max_length=80)

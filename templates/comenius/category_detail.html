@@ -1,6 +1,6 @@
 {% extends 'comenius/base.html' %}
-
-
+{% load comenius_extra %}
+{% load thumbnail %}
 {% block header %}
 <h2>{{title}}</h2>
 <h3>
@@ -21,6 +21,14 @@
 
 {% block main %}
     {% for project in category.project_set.all %}
-        <a href="{% url 'comenius:project-detail' slug=project.slug %}">{{project.title}}</a>
+        <section class="preview">
+        <h4><a href="{% url 'comenius:project-detail' slug=project.slug %}">{{project.title}}</a></h4>
+        <div>
+            {% thumbnail project.album.images.all.0.image "200" as im %}
+            <img class="media-object" src="">
+            {% endthumbnail %}
+            {{project.short_desc|slice:":300"|add:"..."|markup}}
+        </div>
+        </section>
     {% endfor %}
 {% endblock main %}

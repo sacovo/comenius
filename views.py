@@ -5,11 +5,12 @@ from djangoutils import NavigationPoint as nav
 
 import django.contrib.auth.views
 
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy as reverse
 from django.core.urlresolvers import reverse as reverse_
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from comenius.models import Album, Category, Report, Event, Image, Project
 
@@ -62,7 +63,8 @@ class ImageCreateView(ExtraCreateView):
     '''
     def form_valid(self, form):
         self.object = form.save()
-        album = Album.objects.get(pk=1)
+        post = self.request.POST
+        album = Album.objects.get(pk=self.request.POST['album'])
         album.images.add(self.object)
         album.save()
         self.success_url = reverse('comenius:album-detail', kwargs={'pk': album.pk})
@@ -81,6 +83,25 @@ class ProjectCreateView(ExtraCreateView):
     def get_success_url(self):
         return reverse('comenius:project-detail',
                     kwargs={'slug': self.object.slug})
+
+class SpecialUpdateView(ExtraUpdateView):
+    test_func = None
+
+    def get_object(self, queryset=None):
+        obj = super(SpecialUpdateView, self).get_object(queryset)
+        if(self.test_func(self.request.user, obj)):
+            return obj
+        raise PermissionDenied
+
+
+class SpecialDeleteView(ExtraDeleteView):
+    test_func = None
+
+    def get_object(self, queryset=None):
+        obj = super(SpecialDeleteView, self).get_object(queryset)
+        if(self.test_func(self.request.user, obj)):
+            return obj
+        raise PermissionDenied
 
 #-------------------------------------------------------------------------------
 # Special Views: index, impressum, about, login, logout, search
@@ -153,6 +174,26 @@ album_create = login_required(
         })
 )
 
+album_update = SpecialUpdateView.as_view(
+        test_func = lambda user, obj: user == obj.owner,
+        model = Album,
+        fields = ['name', 'is_public'],
+        extra = {
+            'title': lambda c: c['object'].name,
+            'appname': "comenius",
+        }
+)
+
+album_delete = SpecialDeleteView.as_view(
+        test_func = lambda user, obj: user == obj.owner,
+        model = Album,
+        success_url = reverse('comenius:album-list'),
+        extra = {
+            'title': lambda c: c['object'].name,
+            'appname': "comenius",
+        }
+)
+
 # Category
 
 category_detail = ExtraDetailView.as_view(
@@ -208,6 +249,9 @@ image_album_add = login_required(
         )
 )
 
+
+
+
 # Project
 
 project_detail = ExtraDetailView.as_view(
@@ -223,7 +267,7 @@ project_detail = ExtraDetailView.as_view(
 project_create = ProjectCreateView.as_view(
         model = Project,
         fields = ["title", "slug", "short_desc", "description",
-                "users", "school", "category"],
+                    "school", "users", "category"],
 
         extra = {
             'title': "Projekt hochladen",
@@ -232,3 +276,25 @@ project_create = ProjectCreateView.as_view(
         }
 )
 
+project_update = SpecialUpdateView.as_view(
+        test_func = lambda user, obj: user in obj.users.all(),
+        model = Project,
+        fields = ["title", "slug", "short_desc", "description",
+                    "school", "users", "category"],
+        
+        extra = {
+            'title': lambda c: c['object'].title,
+            'categories': Category.objects.all(),
+            'appname': "comenius",
+        }
+)
+
+project_delete = SpecialDeleteView.as_view(
+        test_func = lambda user, obj: user in obj.users.all(),
+        model = Project,
+        extra = {
+            'title': lambda c: c['object'].title(),
+            'categories': Category.objects.all(),
+            'appname': "comenius",
+        }
+)
