@@ -41,7 +41,7 @@ class School(models.Model):
 class Project(models.Model):
     '''
         Publish projects on website
-    ''''
+    '''
     slug = models.SlugField(primary_key=True)
     title = models.CharField(max_length=140)
     short_desc = models.TextField()
