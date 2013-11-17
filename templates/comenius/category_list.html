@@ -1,0 +1,25 @@
+{% extends 'comenius/base.html'%}
+
+{% block header %}
+<h2>{{title}}</h2>
+<h3>
+    <ol class="breadcrumb">
+        {% for category in categories %}
+            {% if category == object %}
+                <li class="active">{{category.name}}</li>
+            {% else %}
+                <li><a href="{% url 'comenius:category-detail' slug=category.slug %}">{{category.name}}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if user.is_authenticated %}
+            <span class="pull-right">
+                <a href="{% url 'comenius:project-create' %}">Projekt erstellen</a>
+            </span>
+        {% endif %}
+    </ol>
+</h3>
+{% endblock header %}
+
+{% block main %}
+
+{% endblock main %}

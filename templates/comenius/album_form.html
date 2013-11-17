@@ -2,8 +2,18 @@
 
 {% block main %}
     <form action="" method="post" enctype="multipart/form-data">
-        {{form}}
+        <div class="form-group">
+            <label for="id_name">
+                Name
+            </label>
+            <input type="text" name="name" id="id_name" value="{{form.name.value}}" />
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> &Ouml;ffentlich
+            </label>
+        </div>
         {% csrf_token %}
-        <button type="submit">Abschicken</button>
+        <button type="submit" class="btn btn-primary">Abschicken</button>
     </form>
 {% endblock main %}

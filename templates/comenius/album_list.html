@@ -6,42 +6,16 @@
 {% for album in object_list %}
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-        {% thumbnail album.images.all.0.image "200" as im %}
+        {% thumbnail album.images.all.0.image "600" as im %}
             <img  src="{{im.url}}">
         {% endthumbnail %}
       <div class="caption">
         <h3>{{album.name}}</h3>
         <p><a href="{% url 'comenius:album-detail' pk=album.pk %}">Anschauen</a>
         {% if album.owner == user %}
-            <span class="pull-right" >
-            <a href="{% url 'comenius:album-update' pk=album.pk %}">
-            <span class="glyphicon glyphicon-edit"></span></a>
-            <a href="#" data-toggle="modal" data-target="#delete{{album.pk}}">
-                <span class="glyphicon glyphicon-trash"></span>
-            </a>
-                <div class="modal fade" id="delete{{album.pk}}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel{{album.pk}}" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="delete{{album.pk}}">{{album.name}} l&ouml;schen?</h4>
-                            </div>
-                            <div class="modal-body">
-                                Willst du das Album {{album.name}} wirklich l&ouml;schen?
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <form class="clearfix" action="{% url 'comenius:album-delete' pk=album.pk %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="pk" value="{{album.pk}}"/>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                                    <button class="btn btn-warning">Best&auml;tigen</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.modal -->
-            </span>
+        <span class="pull-right">
+            {% include 'comenius/album_control.html' %}
+        </span>
         {% endif %}
         </p>
       </div>

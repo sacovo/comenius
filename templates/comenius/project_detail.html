@@ -1,7 +1,12 @@
-{% extends 'comenius/category_detail.html' %}
+{% extends 'comenius/category_list.html' %}
 {% load comenius_extra %}
 {% block main %}
-    {{object.short_desc|markup}}
+    {% if user in object.users.all %}
+        {% include 'comenius/project_control.html' %}
+    {% endif %}
+    <div class="introduction">
+        {{object.short_desc|markup}}
+    </div>
     {{object.description|markup}}
     
 {% endblock main %}

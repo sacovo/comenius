@@ -1,0 +1,28 @@
+
+<a href="{% url 'comenius:project-update' slug=object.slug %}">
+    <span class="glyphicon glyphicon-edit"></span></a>
+
+<a href="#" data-transition="flow" data-toggle="modal" data-target="#delete{{object.slug}}">
+    <span class="glyphicon glyphicon-trash"></span></a>
+
+<div class="modal fade" id="delete{{object.slug}}" tabindex="-1" role="dialog" aria-labelledby="deleteLabel{{object.slug}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="delete{{object.slug}}">{{object.title}} l&ouml;schen?</h4>
+            </div>
+            <div class="modal-body">
+                Willst du {{object.title}} wirklich l&ouml;schen?
+            </div>
+            <div class="modal-footer">
+                <form class="clearfix" action="{% url 'comenius:project-delete' slug=object.slug %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="slug" value="{{object.slug}}"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                    <button class="btn btn-warning">Best&auml;tigen</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

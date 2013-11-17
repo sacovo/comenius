@@ -1,34 +1,24 @@
-{% extends 'comenius/base.html' %}
+{% extends 'comenius/category_list.html' %}
 {% load comenius_extra %}
 {% load thumbnail %}
-{% block header %}
-<h2>{{title}}</h2>
-<h3>
-    <ol class="breadcrumb">
-        {% for category in categories %}
-            {% if category == object %}
-                <li class="active">{{category.name}}</li>
-            {% else %}
-                <li><a href="{% url 'comenius:category-detail' slug=category.slug %}">{{category.name}}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% if user.is_authenticated %}
-                <li><a href="{% url 'comenius:project-create' %}">Hinzuf&uuml;gen</a></li>
-        {% endif %}
-    </ol>
-</h3>
-{% endblock header %}
+
 
 {% block main %}
     {% for project in category.project_set.all %}
         <section class="preview">
-        <h4><a href="{% url 'comenius:project-detail' slug=project.slug %}">{{project.title}}</a></h4>
-        <div>
-            {% thumbnail project.album.images.all.0.image "200" as im %}
-            <img class="media-object" src="">
-            {% endthumbnail %}
-            {{project.short_desc|slice:":300"|add:"..."|markup}}
-        </div>
+            <div>
+                {% thumbnail project.album.images.all.0.image "200" as im %}
+                <img class="" src="{{im.url}}">
+                {% endthumbnail %}
+                <div class="text">
+                    <h4>
+                        <a href="{% url 'comenius:project-detail' slug=project.slug %}">
+                            {{project.title}}
+                        </a>
+                    </h4>
+                    {{project.short_desc|slice:":300"|add:"..."|markup}}
+                </div>
+            </div>
         </section>
     {% endfor %}
 {% endblock main %}

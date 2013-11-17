@@ -134,6 +134,14 @@ login = lambda request: django.contrib.auth.views.login(request,
 logout = lambda request: django.contrib.auth.views.logout(request,
                                             extra_context=dict(extra.items()))
 
+password_change = lambda request: django.contrib.auth.views.password_change(request,
+                post_change_redirect=reverse('comenius:password-change-done'),
+                extra_context=dict(extra.items() + {'title': "Passwort"}.items()))
+
+password_change_done = lambda request: django.contrib.auth.views.password_change_done(request,
+                extra_context=dict(extra.items() + {'title': "Passwort"}.items()))
+
+
 search = ExtraTemplateView.as_view(
         template_name="comenius/search.html",
         extra={
@@ -195,6 +203,16 @@ album_delete = SpecialDeleteView.as_view(
 )
 
 # Category
+
+category_list = ExtraListView.as_view(
+        model = Category,
+        extra = {
+            'title': "Projekte",
+            'categories': Category.objects.all(),
+            'appname': "comenius",
+        }
+)
+
 
 category_detail = ExtraDetailView.as_view(
         model = Category,
@@ -264,7 +282,8 @@ project_detail = ExtraDetailView.as_view(
         
 )
 
-project_create = ProjectCreateView.as_view(
+project_create = login_required(
+    ProjectCreateView.as_view(
         model = Project,
         fields = ["title", "slug", "short_desc", "description",
                     "school", "users", "category"],
@@ -274,6 +293,7 @@ project_create = ProjectCreateView.as_view(
             'categories': Category.objects.all(),
             'appname': "comenius",
         }
+    )
 )
 
 project_update = SpecialUpdateView.as_view(
@@ -292,6 +312,7 @@ project_update = SpecialUpdateView.as_view(
 project_delete = SpecialDeleteView.as_view(
         test_func = lambda user, obj: user in obj.users.all(),
         model = Project,
+        success_url = reverse('comenius:index'),
         extra = {
             'title': lambda c: c['object'].title(),
             'categories': Category.objects.all(),
