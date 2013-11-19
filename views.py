@@ -1,9 +1,12 @@
 # Create your views here.
+import os
 
 from djangoutils.views.generic import *
 from djangoutils import NavigationPoint as nav
 
 import django.contrib.auth.views
+
+from django.conf import settings
 
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy as reverse
@@ -15,8 +18,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from comenius.models import Album, Category, Report, Event, Image, Project
 
 site = []
-
-site.append(nav("Home", reverse('comenius:index')))
 
 projects = []
 
@@ -30,7 +31,7 @@ site.append(nav("Galerie", reverse('comenius:album-list')))
 
 extra = {
     "site": site,
-    "appname": "Comenius Projekt",
+    "appname": "Comesco Nachhaltigkeit",
     "homeurl": reverse('comenius:index'),
     "events": Event.objects.all()[:5],
 }
@@ -107,11 +108,16 @@ class SpecialDeleteView(ExtraDeleteView):
 # Special Views: index, impressum, about, login, logout, search
 #-------------------------------------------------------------------------------
 
+image_dir = os.path.join(settings.STATIC_ROOT, 'comenius/imgs/headers/')
+
+images = os.listdir(image_dir)
+
 index = ExtraTemplateView.as_view(
                 template_name="comenius/index.html",
                 extra={
                     'title': "Home",
                     'appname': "comenius",
+                    'images': images,
                 })
 
 impressum = ExtraTemplateView.as_view(

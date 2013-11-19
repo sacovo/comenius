@@ -3,7 +3,39 @@
 
 {% block header %}
     <div class="img-heading">
-        <img src="{% static 'comenius/imgs/headers/building.jpeg' %}"></img>
+        <div id="carousel-heading" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+        {% for image in images %}
+            {% if forloop.first %}
+            <li data-target="#carousel-heading" data-slide-to="{{foorloop.counter0}}" class="active"></li>
+            {% else %}
+            <li data-target="#carousel-heading" data-slide-to="{{forloop.counter0}}"></li>
+            {% endif %}
+        {% endfor %}
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            {% for image in images %}
+                {% if forloop.first %}
+                <div class="item active">
+                    <img src="{% static 'comenius/imgs/headers/'%}{{image}}" alt="...">
+                </div>
+                {% else %}
+                <div class="item">
+                    <img src="{% static 'comenius/imgs/headers/'%}{{image}}" alt="...">
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <a class="left carousel-control" href="#carousel-heading" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-heading" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
     </div>
 {% endblock header %}
 
