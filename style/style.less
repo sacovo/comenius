@@ -3,13 +3,24 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu|Open+Sans);
 
 header {
+    .make-row();
+    .make-md-column(12);
     & > p  {
         font-weight: 600;
     }
 }
 
+div.img-heading{
+    .make-row();
+    img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    widht: 100%;
+    
+}
 
-section.container {
+section.content {
     .make-row();
     
     article.main {
@@ -19,6 +30,7 @@ section.container {
     aside {
         .make-md-column(4);
         .panel;
+        padding: 0;
     }
     
     & .panel-body {
@@ -54,5 +66,17 @@ form>.form-group {
     select {
         .form-control;
         height: auto;
+    }
+}
+
+
+footer{
+    .make-row();
+    div {
+        .make-sm-column(9);
+        font-size: 12px;
+    }
+    img {
+        .make-sm-column(3);
     }
 }

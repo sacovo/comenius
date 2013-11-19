@@ -172,15 +172,21 @@ album_detail = ExtraDetailView.as_view(
 )
 
 
-album_create = login_required(
-	CreateOwnerView.as_view(
+album_create_view = CreateOwnerView.as_view(
 	    model = Album,
         fields = ['name', 'is_public'],
         extra = {
             'title': "Album erstellen",
             'appname': 'comenius',
-        })
+        }
 )
+
+def album_create(request, *args, **kwargs):
+    if(request.user.has_perms(['comenius.can_add_album'])):
+        return album_create_view(request, *args, **kwargs)
+    else:
+        return PermissionDenied
+
 
 album_update = SpecialUpdateView.as_view(
         test_func = lambda user, obj: user == obj.owner,
