@@ -1,4 +1,4 @@
-# Create your views here.
+# coding=utf-8
 import os
 
 from djangoutils.views.generic import *
@@ -33,7 +33,7 @@ extra = {
     "site": site,
     "appname": "Comesco Nachhaltigkeit",
     "homeurl": reverse('comenius:index'),
-    "events": Event.objects.all()[:5],
+    "events": lambda one: Event.objects.all()[:5],
 }
 
 app_specific['comenius'] = extra
@@ -111,6 +111,18 @@ class SpecialDeleteView(ExtraDeleteView):
 image_dir = os.path.join(settings.STATIC_ROOT, 'comenius/imgs/headers/')
 
 images = os.listdir(image_dir)
+
+titles = ["Herzlich Willkommen", "Ziele", "Teilnehmer"]
+
+subtitels = [u"Auf dieser Seite kannst Du Dich Über das COMENIUS Projekt\
+            Über Nachhaltigkeit informieren und Bilder der Austausch-Wochen anschauen.",
+            u"Während des Comenius Projektes tauschen sich verschiedene Schulen über Themen\
+            , die die Nachhaltigkeit betreffen aus. Dies tun sie bei 4 Treffen an den jeweiligen Schulen, über 2 Jahre verteilt.",
+            u"Die Teilnehmenden Schulen sind: Die École privée Sainte Anne, aus Luxemburg, die Kantonsschule Wohlen aus der Schweiz, das Droste-Hülshoff-Gymnasium aus Deutschland und das Bundesgymnasium Dornbirn aus Österreich."]
+
+map_func = lambda image, title, subtitle: (image, title or "", subtitle or "")
+
+images = map(map_func, images, titles, subtitels)
 
 index = ExtraTemplateView.as_view(
                 template_name="comenius/index.html",

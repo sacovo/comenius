@@ -6214,6 +6214,10 @@ header:after {
 header > p {
   font-weight: 600;
 }
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.47);
+  border-radius: 1px;
+}
 div.img-heading {
   margin-left: -15px;
   margin-right: -15px;
