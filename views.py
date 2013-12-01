@@ -112,10 +112,9 @@ image_dir = os.path.join(settings.STATIC_ROOT, 'comenius/imgs/headers/')
 
 images = os.listdir(image_dir)
 
-titles = ["Herzlich Willkommen"]
+titles = []
 
-subtitels = [u"Auf dieser Seite kannst Du Dich Über das COMENIUS Projekt\
-            Über Nachhaltigkeit informieren und Bilder der Austausch-Wochen anschauen."]
+subtitels = []
 
 map_func = lambda image, title, subtitle: (image, title or "", subtitle or "")
 
