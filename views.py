@@ -21,9 +21,15 @@ site = []
 
 projects = []
 
+order = ["Umwelt", "Verkehr", u"Ern\xe4hrung", "Energie"]
+
 for category in Category.objects.all():
     projects.append(nav(category.name,
         reverse('comenius:category-detail', kwargs={'slug':category.slug})))
+
+key=lambda d:order.index(d.name)
+
+projects.sort(key=key)
 
 site.append(nav("Projekte", subsites=projects))
 
@@ -187,7 +193,7 @@ album_detail = ExtraDetailView.as_view(
 
 
 album_create_view = CreateOwnerView.as_view(
-	    model = Album,
+	model = Album,
         fields = ['name', 'is_public'],
         extra = {
             'title': "Album erstellen",
@@ -199,7 +205,7 @@ def album_create(request, *args, **kwargs):
     if(request.user.has_perms(['comenius.can_add_album'])):
         return album_create_view(request, *args, **kwargs)
     else:
-        return PermissionDenied
+        raise PermissionDenied()
 
 
 album_update = SpecialUpdateView.as_view(
@@ -222,13 +228,15 @@ album_delete = SpecialDeleteView.as_view(
         }
 )
 
+
+key2 = lambda d: order.index(d.name)
 # Category
 
 category_list = ExtraListView.as_view(
         model = Category,
         extra = {
             'title': "Projekte",
-            'categories': Category.objects.all(),
+            'categories': sorted(Category.objects.all(),key=key2),
             'appname': "comenius",
         }
 )
@@ -238,7 +246,7 @@ category_detail = ExtraDetailView.as_view(
         model = Category,
         extra = {
             'title': "Projekte",
-            'categories': Category.objects.all(),
+            'categories': sorted(Category.objects.all(),key=key2),
             'appname': "comenius"
         }
 )

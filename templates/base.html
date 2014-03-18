@@ -33,5 +33,8 @@
                         $("[data-toggle='popover']").popover();
                     });
         </script>
+        {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+            {% include "ga.html" %}
+        {% endif %}
     </body>
 </html>

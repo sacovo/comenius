@@ -3,6 +3,10 @@
 
 {% block style %}
     <link href="{% static 'comenius/css/style.css' %}" rel="stylesheet" media="screen">
+    <style>
+        section.content{min-height:1000px}
+    </style>
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'comenius/favicon.ico' %}" />
 {% endblock style %}
 
 
@@ -45,23 +49,7 @@
                     </div>
                 </div>
                 ---->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#linkPanel">
-                                Links
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="linkPanel" class="panel-collapse collapse list-group">
-                                <a href="http://sainte-anne.lu/" class="list-group-item">École privée Sainte-Anne, Ettelbruck, Luxemburg</a>
-                                <a href="http://www.kanti-wohlen.ch/home-de.xhtm" class="list-group-item">Kantonsschule Wohlen, Wohlen Ag, Schweiz</a>
-                                <a href="http://www.dhg-freiburg.de/joomla/" class="list-group-item">Droste-Hülshoff-Gymnasium, Freiburg, Deutschland</a>
-                                <a href="http://www.bgdornbirn.at/" class="list-group-item">Bundesgymnasium Dornbirn, Dornbirn, &Ouml;sterreich</a>
-                                <a href="http://en.unesco.org/" class="list-group-item">UNESCO Homepage</a>
-                                <a href="http://ec.europa.eu/education/lifelong-learning-programme/comenius_de.htm" class="list-group-item">Comenius</a>
-                    </div>
-                </div>
+                
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -87,26 +75,27 @@
                             {% endif %}
                         </div>
                     </div>
-                <div class="panel panel-default">
+                    <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#austauschPanel">
-                                Austausch
+                            <a data-toggle="collapse" data-parent="#accordion" href="#linkPanel">
+                                Links
                             </a>
                         </h4>
                     </div>
-                <div id="austauschPanel" class="panel-collapse collapse">
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="/reports/1/">Luxemburg</a></li>
-                        <li class="list-group-item"><a href="">&Ouml;sterreich</a></li>
-                        <li class="list-group-item"><a href="">Schweiz</a></li>
-                        <li class="list-group-item"><a href="">Deutschland</a></li>
-                    </ul>
+                    <div id="linkPanel" class="panel-collapse collapse list-group">
+                                <a href="http://sainte-anne.lu/" class="list-group-item">École privée Sainte-Anne, Ettelbruck, Luxemburg</a>
+                                <a href="http://www.kanti-wohlen.ch/home-de.xhtm" class="list-group-item">Kantonsschule Wohlen, Wohlen Ag, Schweiz</a>
+                                <a href="http://www.dhg-freiburg.de/joomla/" class="list-group-item">Droste-Hülshoff-Gymnasium, Freiburg, Deutschland</a>
+                                <a href="http://www.bgdornbirn.at/" class="list-group-item">Bundesgymnasium Dornbirn, Dornbirn, &Ouml;sterreich</a>
+                                <a href="http://en.unesco.org/" class="list-group-item">UNESCO Homepage</a>
+                                <a href="http://ec.europa.eu/education/lifelong-learning-programme/comenius_de.htm" class="list-group-item">Comenius</a>
+                    </div>
                 </div>
             </div>
         {% endblock aside %}
         </aside>
     </section>
-    <footer><div>Dieses Projekt wurde mit Unterstützung der Europäischen Kommission finanziert. Die Verantwortung für den Inhalt dieser Veröffentlichung (Mitteilung) trägt allein der Verfasser, die Kommission haftet nicht für die weitere Verwendung der darin enthaltenen Angaben.</div><img class="media-object pull-right" src="{% static 'comenius/imgs/pfll.jpg' %}">
+    <footer><img class="media-object pull-left" src="{% static 'comenius/imgs/pfll.jpg' %}"><div>Dieses Projekt wurde mit Unterstützung der Europäischen Kommission finanziert. Die Verantwortung für den Inhalt dieser Veröffentlichung (Mitteilung) trägt allein der Verfasser, die Kommission haftet nicht für die weitere Verwendung der darin enthaltenen Angaben.</div>
         </footer>
 {% endblock container %}>

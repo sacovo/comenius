@@ -1,6 +1,7 @@
 {% extends 'comenius/base.html' %}
 {% load staticfiles %}
+{% load comenius_extra %}
 {% block main %}
-    <p>{{object.content}}</p>
+    <p>{{object.content|markup}}</p>
 {% endblock main %}
 
