@@ -266,7 +266,7 @@ report_detail = ExtraDetailView.as_view(
 event_create = login_required(
         CreateOwnerView.as_view(
             model = Event,
-            fields = ["name", "date", "description"],
+            fields = ["name", "date","end_date", "description"],
             extra = {
                 'title': "Termin eintragen",
                 'appname': "comenius",
@@ -278,7 +278,7 @@ event_create = login_required(
 event_update = login_required(
         ExtraUpdateView.as_view(
             model = Event,
-            fields = ["name", "date", "description"],
+            fields = ["name", "date","end_date", "description"],
             extra = {
                 'title': "Termin bearbeiten",
                 'appname': "comenius",

@@ -61,7 +61,7 @@
                     <div id="terminPanel" class="panel-collapse collapse list-group">
                                 <ul class="list-group">
                                     {% for event in events %}
-                                    <li class="list-group-item"><a data-container="body" data-toggle="popover" data-placement="left" data-title="{{event.date}}" data-content="{{event.description}}" >{{event.name}}</a>
+                                    <li class="list-group-item"><a data-container="body" data-toggle="popover" data-placement="left" data-title="{{event.date}} - {{event.end_date}}" data-content="{{event.description}}" >{{event.name}}</a>
                                         {% if perms.comenius.can_add_event %}
                                             <div class="pull-right"><a href="{% url 'comenius:event-update' pk=event.pk %}"><span class="glyphicon glyphicon-edit"></span></a></div>
                                         {% endif %}

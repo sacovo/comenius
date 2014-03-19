@@ -74,6 +74,7 @@ class Document(models.Model):
 
 class Event(models.Model):
     date = models.DateTimeField()
+    end_date = models.DateTimeField()
     name = models.CharField(max_length=140)
     description = models.TextField()
     owner = models.ForeignKey(User)
