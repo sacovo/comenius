@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Project.pdf'
         db.add_column(u'comenius_project', 'pdf',
-                      self.gf('django.db.models.fields.files.FileField')(default=None, max_length=100),
+                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
                       keep_default=False)
 
 
@@ -90,7 +90,7 @@ class Migration(SchemaMigration):
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['comenius.Category']"}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'documents': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['comenius.Document']", 'null': 'True', 'blank': 'True'}),
-            'pdf': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
+            'pdf': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'school': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['comenius.School']"}),
             'short_desc': ('django.db.models.fields.TextField', [], {}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'primary_key': 'True'}),
