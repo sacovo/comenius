@@ -314,7 +314,7 @@ project_create = login_required(
     ProjectCreateView.as_view(
         model = Project,
         fields = ["title", "slug", "short_desc", "description",
-                    "school", "users", "category"],
+                    "school", "users", "category", "pdf"],
 
         extra = {
             'title': "Projekt hochladen",
@@ -328,7 +328,7 @@ project_update = SpecialUpdateView.as_view(
         test_func = lambda user, obj: user in obj.users.all(),
         model = Project,
         fields = ["title", "slug", "short_desc", "description",
-                    "school", "users", "category"],
+                    "school", "users", "category", "pdf"],
         
         extra = {
             'title': lambda c: c['object'].title,

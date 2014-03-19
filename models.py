@@ -52,6 +52,7 @@ class Project(models.Model):
     school = models.ForeignKey(School)
     category = models.ForeignKey("Category")
     documents = models.ForeignKey("Document", blank=True, null=True)
+    pdf = models.FileField(upload_to="documents/pdf/", blank=True, null=True)
 
     @models.permalink
     def get_absolute_url(self):
