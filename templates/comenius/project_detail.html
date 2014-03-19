@@ -5,6 +5,7 @@
         {% include 'comenius/project_control.html' %}
     {% endif %}
     <div class="introduction">
+        <p class="download"><a href="{{object.pdf.url}}">PDF</a></p>
         {{object.short_desc|markup}}
     </div>
     {{object.description|markup}}
