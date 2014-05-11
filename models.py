@@ -86,3 +86,15 @@ class Report(models.Model):
     title = models.CharField(max_length=140)
     content = models.TextField()
     owner = models.ForeignKey(User, null=True)
+
+    def __unicode__(self):
+        return self.title
+
+class Mobility(models.Model):
+    name = models.CharField(max_length=140)
+    reports = models.ManyToManyField(Report)
+    ordering = models.IntegerField()
+
+    class Meta:
+        ordering = ['ordering']
+

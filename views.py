@@ -15,7 +15,8 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-from comenius.models import Album, Category, Report, Event, Image, Project
+from comenius.models import Album, Category, Report, Event, Image, Project\
+        ,Mobility
 
 site = []
 
@@ -31,6 +32,12 @@ key=lambda d:order.index(d.name)
 
 projects.sort(key=key)
 
+mobilities = []
+for mobility in Mobility.objects.all():
+    mobilities.append(nav(mobility.name,
+        reverse('comenius:mobility-detail', kwargs={'pk': mobility.pk})))
+
+site.append(nav("Mobilitäten", subsites=mobilities))
 site.append(nav("Projekte", subsites=projects))
 
 site.append(nav("Galerie", reverse('comenius:album-list')))
@@ -344,6 +351,14 @@ project_delete = SpecialDeleteView.as_view(
         extra = {
             'title': lambda c: c['object'].title(),
             'categories': Category.objects.all(),
+            'appname': "comenius",
+        }
+)
+
+mobility_detail = ExtraDetailView.as_view(
+        model = Mobility,
+        extra = {
+            'title': lambda c: c['object'].name,
             'appname': "comenius",
         }
 )

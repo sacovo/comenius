@@ -26,4 +26,5 @@ urlpatterns = patterns('comenius.views',
     url(r"^project/(?P<slug>[\w-]+)/delete/$", 'project_delete', name="project-delete"),
     url(r"^reports/(?P<pk>[\d]+)/$", 'report_detail', name="report-detail"),
     url(r"^search/$", 'search', name="search"),
+    url(r"^mobility/(?P<pk>[\d]+)/$", 'mobility_detail', name="mobility-detail"),
 )

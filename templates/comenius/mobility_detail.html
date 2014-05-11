@@ -1,0 +1,11 @@
+{% extends 'comenius/base.html' %}
+{% block main %}
+Berichte &uuml;ber {{object.name}}.
+
+<ul>
+  {% for report in object.reports.all %}
+  <li><a href="{% url 'comenius:report-detail' report.pk %}">{{report.title}}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
