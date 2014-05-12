@@ -12,4 +12,7 @@
     </div>
     {{object.description|markup}}
     
+    <div class="gallery">
+      <a href="{% url 'comenius:album-detail' object.album.pk %}">Bilder</a>
+    </div>
 {% endblock main %}

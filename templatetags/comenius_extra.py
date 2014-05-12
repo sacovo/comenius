@@ -6,3 +6,7 @@ register = template.Library()
 @register.filter(is_safe=True)
 def markup(value):
     return mark_safe(creole2html(value))
+
+@register.filter
+def mod(value, arg):
+    return value % arg
