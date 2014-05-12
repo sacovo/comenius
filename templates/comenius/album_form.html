@@ -13,6 +13,11 @@
                 <input type="checkbox"> &Ouml;ffentlich
             </label>
         </div>
+        <div class="form-group">
+          <label for="id_category">
+            Kategorie
+          </label>
+          {{form.fields.category.label}}
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">Abschicken</button>
     </form>

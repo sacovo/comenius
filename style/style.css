@@ -6278,7 +6278,7 @@ section.content article.main {
 @media (min-width: 992px) {
   section.content article.main {
     float: left;
-    width: 66.66666667%;
+    width: 75%;
   }
 }
 section.content aside {
@@ -6297,7 +6297,7 @@ section.content aside {
 @media (min-width: 992px) {
   section.content aside {
     float: left;
-    width: 33.33333333%;
+    width: 25%;
   }
 }
 section.content aside > .list-group {

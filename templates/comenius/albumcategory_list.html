@@ -1,0 +1,13 @@
+{% extends 'comenius/base.html' %}
+
+{% block main %}
+<section class="preview">
+  {% for category in object_list %}
+    <div>
+      <h2>{{category.name}}
+      </h2>
+    </div>
+
+  {% endfor %}
+</section>
+{% endblock %}

@@ -13,6 +13,7 @@ class Album(models.Model):
     images = models.ManyToManyField("Image", blank=True)
     is_public = models.BooleanField(default=False)
     owner = models.ForeignKey(User)
+    category = models.ForeignKey("AlbumCategory", blank=True, null=True)
     
     @models.permalink
     def get_absolute_url(self):
@@ -97,4 +98,14 @@ class Mobility(models.Model):
 
     class Meta:
         ordering = ['ordering']
+
+
+class AlbumCategory(models.Model):
+    name = models.CharField(max_length=140)
+    ordering = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+    class Meta:
+        ordering = ["ordering"]
 

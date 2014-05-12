@@ -27,4 +27,5 @@ urlpatterns = patterns('comenius.views',
     url(r"^reports/(?P<pk>[\d]+)/$", 'report_detail', name="report-detail"),
     url(r"^search/$", 'search', name="search"),
     url(r"^mobility/(?P<pk>[\d]+)/$", 'mobility_detail', name="mobility-detail"),
+    url(r"^categories/$", 'albumcategory_list', name="album-category-list"),
 )
