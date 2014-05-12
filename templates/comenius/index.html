@@ -5,15 +5,6 @@
     <div class="img-heading">
         <div id="carousel-heading" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
-        <ol class="carousel-indicators">
-        {% for image in images %}
-            {% if forloop.first %}
-            <li data-target="#carousel-heading" data-slide-to="{{forloop.counter0}}" class="active"></li>
-            {% else %}
-            <li data-target="#carousel-heading" data-slide-to="{{forloop.counter0}}"></li>
-            {% endif %}
-        {% endfor %}
-        </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
@@ -21,10 +12,6 @@
                 {% if forloop.first %}
                 <div class="item active">
                     <img src="{% static 'comenius/imgs/headers/'%}{{image.0}}" alt="">
-                    <div class="carousel-caption">
-                        <h3>{{image.1}}</h3>
-                        <p>{{image.2}}</p>
-                    </div>
                 </div>
                 {% else %}
                 <div class="item">
