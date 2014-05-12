@@ -90,7 +90,7 @@ class ProjectCreateView(ExtraCreateView):
             Append an album to every project that is created
         '''
         form.instance.album = Album.objects.create(name=form.instance.title,
-                                    is_public=True, owner=self.request.user)
+                                    is_public=True, owner=self.request.user, ordering=10)
         return super(ProjectCreateView, self).form_valid(form)
     
     def get_success_url(self):

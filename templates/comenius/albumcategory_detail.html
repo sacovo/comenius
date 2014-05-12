@@ -1,10 +1,13 @@
 {% extends 'comenius/base.html' %}
 {% load staticfiles %}
 {% load thumbnail %}
+{% load comenius_extra %}
 {% block main %}
 {% with object_list=object.album_set.all %}
 <div class="row">
+
 {% for album in object_list %}
+{% if forloop.counter|mod:2 %}
   <div class="col-sm-12 col-md-6" style="min-height:300px">
     <div class="thumbnail">
         {% thumbnail album.images.all.0.image "600" as im %}
@@ -22,6 +25,29 @@
       </div>
     </div>
   </div>
+  {% endif %}
+{% endfor %}
+
+{% for album in object_list %}
+{% if forloop.counter0|mod:2 %}
+  <div class="col-sm-12 col-md-6" style="min-height:300px">
+    <div class="thumbnail">
+        {% thumbnail album.images.all.0.image "600" as im %}
+            <img  src="{{im.url}}">
+        {% endthumbnail %}
+      <div class="caption">
+        <h3>{{album.name}}</h3>
+        <p><a href="{% url 'comenius:album-detail' pk=album.pk %}">Anschauen</a>
+        {% if album.owner == user %}
+        <span class="pull-right">
+            {% include 'comenius/album_control.html' %}
+        </span>
+        {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 {% endfor %}
 {% if user.is_authenticated %}
     <div class="col-sm-6 col-md-4">

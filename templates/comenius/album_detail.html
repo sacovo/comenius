@@ -1,5 +1,6 @@
 {% extends 'comenius/base.html' %}
 {% load thumbnail %}
+{% load comenius_extra %}
 
 {% block main %}
     <div class="row">
@@ -26,6 +27,7 @@
         </div>
         {% endif %}
         {% for image in object.images.all %}
+        {% if forloop.counter0|mod:2 %}
         <div class="col-sm-6 col-md-6">
             <a href="{{image.image.url}}" class="thumbnail">
                 {% thumbnail image.image "500" as im %}
@@ -33,10 +35,22 @@
                 {% endthumbnail %}
             </a>
         </div>
+        {% endif %}
         {% empty %}
             <b>Noch keine Bilder vorhanden!</b>
         {% endfor %}
        
+        {% for image in object.images.all %}
+        {% if forloop.counter|mod:2 %}
+        <div class="col-sm-6 col-md-6">
+            <a href="{{image.image.url}}" class="thumbnail">
+                {% thumbnail image.image "500" as im %}
+                <img src="{{im.url}}" title="{{image.description}}">
+                {% endthumbnail %}
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
     
 {% endblock %}
