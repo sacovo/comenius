@@ -4,10 +4,8 @@
 <section class="preview">
   {% for category in object_list %}
     <div>
-      <h2>{{category.name}}
-      </h2>
+      <h2><a href="{% url 'comenius:album-category-detail' category.pk %}">{{category.name}}</a></h2>
     </div>
-
   {% endfor %}
 </section>
 {% endblock %}

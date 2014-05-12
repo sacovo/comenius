@@ -369,3 +369,10 @@ albumcategory_list = ExtraListView.as_view(
             'appname': "comenius",
             }
         )
+albumcategory_detail = ExtraDetailView.as_view(
+        model = AlbumCategory,
+        extra = {
+            'title': lambda c: c['object'].name,
+            'appname': "comenius",
+            }
+        )
