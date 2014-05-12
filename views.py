@@ -22,7 +22,7 @@ site = []
 
 projects = []
 
-order = ["Umwelt", "Verkehr", u"Ern\xe4hrung", "Energie"]
+order = ["Umwelt", "Mobilität", u"Ern\xe4hrung", "Energie"]
 
 for category in Category.objects.all():
     projects.append(nav(category.name,
@@ -40,7 +40,7 @@ for mobility in Mobility.objects.all():
 site.append(nav("Mobilitäten", subsites=mobilities))
 site.append(nav("Projekte", subsites=projects))
 
-site.append(nav("Galerie", reverse('comenius:album-list')))
+site.append(nav("Galerie", reverse('comenius:album-category-list')))
 
 extra = {
     "site": site,
@@ -58,7 +58,6 @@ class CreateOwnerView(ExtraCreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super(CreateOwnerView, self).form_valid(form)
-
 
 class AlbumListView(ExtraListView):
     '''
@@ -201,7 +200,7 @@ album_detail = ExtraDetailView.as_view(
 
 album_create_view = CreateOwnerView.as_view(
 	model = Album,
-        fields = ['name', 'is_public'],
+        fields = ['name', 'is_public', 'category'],
         extra = {
             'title': "Album erstellen",
             'appname': 'comenius',
@@ -218,7 +217,7 @@ def album_create(request, *args, **kwargs):
 album_update = SpecialUpdateView.as_view(
         test_func = lambda user, obj: user == obj.owner,
         model = Album,
-        fields = ['name', 'is_public'],
+        fields = ['name', 'is_public', 'category'],
         extra = {
             'title': lambda c: c['object'].name,
             'appname': "comenius",
