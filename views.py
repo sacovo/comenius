@@ -16,7 +16,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from comenius.models import Album, Category, Report, Event, Image, Project\
-        ,Mobility
+        ,Mobility, AlbumCategory
 
 site = []
 
