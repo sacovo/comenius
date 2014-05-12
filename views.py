@@ -22,7 +22,7 @@ site = []
 
 projects = []
 
-order = ["Umwelt", "Mobilit\xe4t", u"Ern\xe4hrung", "Energie"]
+order = ["Umwelt", u"Mobilit\xe4t", u"Ern\xe4hrung", "Energie"]
 
 for category in Category.objects.all():
     projects.append(nav(category.name,
