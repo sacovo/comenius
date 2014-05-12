@@ -14,11 +14,14 @@ class Album(models.Model):
     is_public = models.BooleanField(default=False)
     owner = models.ForeignKey(User)
     category = models.ForeignKey("AlbumCategory", blank=True, null=True)
-    
+    ordering = models.IntegerField()
+
     @models.permalink
     def get_absolute_url(self):
         return ('comenius:album-detail', (), {'pk':self.pk})
 
+    class Meta:
+        ordering = ['ordering']
 
 class Image(models.Model):
     '''
@@ -103,6 +106,7 @@ class Mobility(models.Model):
 class AlbumCategory(models.Model):
     name = models.CharField(max_length=140)
     ordering = models.IntegerField()
+    image = models.ImageField(upload_to="logos/",blank=True, null=True)
 
     def __unicode__(self):
         return self.name
