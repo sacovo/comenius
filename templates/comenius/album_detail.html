@@ -4,7 +4,8 @@
 {% load comenius_extra %}
 
 {% block scripts %}
-<script type="text/javascript" src="static 'comenius/js/galleria-1.3.5.min.js' %}"></script>
+{{block.super}}
+<script type="text/javascript" src="{% static 'comenius/js/galleria-1.3.5.min.js' %}"></script>
 <style>
   .galleria{height:800px; background #000}
 </style>
@@ -69,7 +70,9 @@
     <div class="galleria" id="galleria">
       {% for image in object.images.all %}
       <div class="thumbnail">
-        <img src="{{image.image.url}}" title="{{image.description}}">
+        {% thumbnail image.image "500" as im %}
+        <img src="{{im.url}}" data-big="{{image.image.url}}" title="{{image.description}}">
+        {% endthumbnail %}
       </div>
       {% endfor %}
     </div>
