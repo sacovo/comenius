@@ -67,7 +67,9 @@
     <div id="carousel" class="barousel">
       <div class="barousel_image">
         {% for image in object.images.all %}
-        <img src="{{image.image.url}}">
+        {% thumbnail image.image "600" as im %}
+        <img src="{{im.url}}">
+        {% endthumbnail%}
         {% endfor %}
       </div>
       <div class="barousel_nav"></div>
