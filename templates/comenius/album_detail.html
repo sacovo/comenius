@@ -1,6 +1,13 @@
 {% extends 'comenius/base.html' %}
 {% load thumbnail %}
+{% load staticfiles %}
 {% load comenius_extra %}
+
+{% block scripts %}
+{{block.super}}
+<script src="{% static 'comenius/js/barousel.jquery.js' %}"></script>
+{% endblock %}
+
 
 {% block main %}
     <div class="row">
@@ -57,5 +64,15 @@
         {% endif %}
         {% endfor %}
     </div>
-    
+    <div id="carousel" class="barousel">
+      <div class="barousel_image">
+        {% for image in object.images.all %}
+        <img src="{{image.url}}">
+        {% endfor %}
+      </div>
+      <div class="barousel_nav"></div>
+    </div>
+    <script>
+      $('#carousel').barousel();
+    </script>
 {% endblock %}
