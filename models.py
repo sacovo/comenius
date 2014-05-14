@@ -68,6 +68,8 @@ class Project(models.Model):
     def get_absolute_url(self):
         return ('comenius:project-detail', (), {'slug':self.slug})
 
+    class Meta:
+        ordering = ['title']
 class Category(models.Model):
     slug = models.SlugField(primary_key=True)
     name = models.CharField(max_length=80)
