@@ -297,7 +297,7 @@ event_update = login_required(
 image_album_add = login_required(
         ImageCreateView.as_view(
             model = Image,
-            fields = ["description", "image"],
+            fields = ["description", "image", "public"],
         )
 )
 

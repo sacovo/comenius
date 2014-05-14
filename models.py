@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.utils.safestring import mark_safe
+
 from django.core.urlresolvers import reverse
 
 class Album(models.Model):
@@ -29,6 +31,10 @@ class Image(models.Model):
     '''
     image = models.ImageField(upload_to="images/%Y/%m/%d")
     description = models.CharField(max_length=255, blank=True)
+    public = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return mark_safe(u"%s: <img src=\"%s\" style=\"height:100px;\">" % (self.description, self.image.url))
 
 class School(models.Model):
     '''
