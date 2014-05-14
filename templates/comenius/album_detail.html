@@ -72,10 +72,14 @@
         {% endthumbnail%}
         {% endfor %}
       </div>
+      <div class="barousel_content">
+        {% for image in object.images.all %}
+        <div>{{image.description}}</div>
+        {% endfor%}
+      </div>
       <div class="barousel_nav"></div>
     </div>
     <script type="text/javascript">
-      alert("test");
       $('#carousel').barousel();
     </script>
 {% endblock %}
