@@ -16,7 +16,7 @@
       <div class="caption">
         <h3>{{album.name}}</h3>
         <p><a href="{% url 'comenius:album-detail' pk=album.pk %}">Anschauen</a>
-        {% if album.owner == user %}
+        {% if album.owner == user or user.is_staff %}
         <span class="pull-right">
             {% include 'comenius/album_control.html' %}
         </span>
