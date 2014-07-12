@@ -365,7 +365,7 @@ mobility_detail = ExtraDetailView.as_view(
 albumcategory_list = ExtraListView.as_view(
         model = AlbumCategory,
         extra = {
-            'title': "Gallerie",
+            'title': "Galerie",
             'appname': "comenius",
             }
         )
