@@ -5,7 +5,7 @@
 
 {% block main %}
     {% for project in category.project_set.all %}
-        <section class="preview">
+        <section class="preview" style="padding-bottom=20px">
             <div>
                 {% thumbnail project.album.images.all.0.image "200" as im %}
                 <img class="" src="{{im.url}}">
